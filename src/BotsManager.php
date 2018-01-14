@@ -2,7 +2,7 @@
 
 namespace Telegram\Bot;
 
-use Illuminate\Contracts\Container\Container;
+use Psr\Container\ContainerInterface as Container;
 use InvalidArgumentException;
 
 /**

@@ -4,6 +4,7 @@ namespace Telegram\Bot\Answers;
 
 use Telegram\Bot\Api;
 use Telegram\Bot\Objects\Update;
+use BadMethodCallException;
 
 /**
  * Class Answer.
@@ -12,6 +13,8 @@ use Telegram\Bot\Objects\Update;
  * @method mixed replyWithPhoto($use_sendPhoto_parameters)           Reply Chat with a Photo. You can use all the sendPhoto() parameters except chat_id.
  * @method mixed replyWithAudio($use_sendAudio_parameters)           Reply Chat with an Audio message. You can use all the sendAudio() parameters except chat_id.
  * @method mixed replyWithVideo($use_sendVideo_parameters)           Reply Chat with a Video. You can use all the sendVideo() parameters except chat_id.
+ * @method mixed replyWithVideoNote($use_sendVideo_parameters)       Reply Chat with a VideoNote. You can use all the sendVideoNote() parameters except chat_id.
+ * @method mixed replyWithGame($use_sendVideo_parameters)            Reply Chat with a Game. You can use all the sendGame() parameters except chat_id.
  * @method mixed replyWithVoice($use_sendVoice_parameters)           Reply Chat with a Voice message. You can use all the sendVoice() parameters except chat_id.
  * @method mixed replyWithDocument($use_sendDocument_parameters)     Reply Chat with a Document. You can use all the sendDocument() parameters except chat_id.
  * @method mixed replyWithSticker($use_sendSticker_parameters)       Reply Chat with a Sticker. You can use all the sendSticker() parameters except chat_id.
@@ -46,11 +49,11 @@ trait Answerable
             $methodName = 'send'.$reply_name;
 
             if (!method_exists($this->telegram, $methodName)) {
-                throw new \BadMethodCallException("Method [$method] does not exist.");
+                throw new BadMethodCallException("Method [$method] does not exist.");
             }
 
             if (null === $chat = $this->update->getChat()) {
-                throw new \BadMethodCallException("No chat available for reply with [$method].");
+                throw new BadMethodCallException("No chat available for reply with [$method].");
             }
 
             $chat_id = $chat->getId();
@@ -60,7 +63,7 @@ trait Answerable
             return call_user_func_array([$this->telegram, $methodName], [$params]);
         }
 
-        throw new \BadMethodCallException("Method [$method] does not exist.");
+        throw new BadMethodCallException("Method [$method] does not exist.");
     }
 
     /**
