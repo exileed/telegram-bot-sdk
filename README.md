@@ -1,5 +1,6 @@
 Telegram Bot API - PHP SDK
 ==========================
+# Deprecated see https://github.com/exileed/telegram-bot-api
 
 > [Telegram Bot API](https://core.telegram.org/bots) PHP SDK. Lets you develop Telegram Bots easily! Supports Laravel out of the box.
 
